@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.devMode" value="true" />
+
+	<package name="default" namespace="/" extends="struts-default">
+		<default-action-ref name="index" />
+		<action name="index">
+			<result name="success">/index.jsp</result>
+		</action>
+		<action name="search" class="org.bq.Search">
+			<result name="success" type="plainText">
+				<param name="charSet">UTF-8</param>
+				<param name="location">/index.jsp</param>
+			</result>
+		</action>
+		<action name="download" class="org.bq.Download">
+			<result name="success" type="stream">
+        <param name="contentType">audio/mpeg</param>
+        <param name="inputName">inputStream</param>
+        <param name="contentDisposition">
+            inline;filename="${downFileName}"
+        </param>
+        <param name="bufferSize">2048</param>
+    </result>
+		</action>
+	</package>
+</struts>    
